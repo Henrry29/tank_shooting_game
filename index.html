@@ -147,22 +147,6 @@
         
         // Player object
         const player = {
-    // Xe tăng mới
-}
-
-
-    const tankImage = new Image();
-    tankImage.src = '1000010449.jpg';
-
-    function drawPlayer() {
-        ctx.drawImage(tankImage, player.x, player.y, player.width, player.height);
-    }
-
-    tankImage.onload = function() {
-        gameLoop();
-    }
-
-
             x: canvas.width / 2,
             y: canvas.height / 2,
             size: PLAYER_SIZE,
@@ -454,7 +438,8 @@
             const activeEnemies = enemies.filter(enemy => enemy.active).length;
             enemiesRemainingDisplay.textContent = activeEnemies;
         }
-
+const playerImage = new Image();
+playerImage.src = '1000010449.jpg';
         // Main game loop
         function gameLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -505,50 +490,21 @@
             
             // Draw player
             if (player.active) {
-                // Draw tank body
-                ctx.save();
-                ctx.translate(player.x, player.y);
-                ctx.rotate(player.angle);
-                
-                // Military style tank body (camouflage green)
-                ctx.fillStyle = '#4b5d35';  // Dark green base
-                ctx.fillRect(-player.size*1.2, -player.size*0.8, player.size*2.4, player.size*1.6);
-                
-                // Tank turret (upper part)
-                ctx.fillStyle = '#5a703f';  // Medium green
-                ctx.fillRect(-player.size, -player.size*0.8, player.size*2, -player.size*0.7);
-                
-                // Camouflage pattern (lighter spots)
-                ctx.fillStyle = '#a0b574';  // Light green spots
-                ctx.beginPath();
-                ctx.ellipse(-player.size*0.5, -player.size*0.4, player.size*0.4, player.size*0.3, 0, 0, Math.PI*2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.ellipse(player.size*0.5, player.size*0.3, player.size*0.6, player.size*0.3, 0, 0, Math.PI*2);
-                ctx.fill();
-                
-                // Tank barrel (longer)
-                ctx.fillStyle = '#2c3519';  // Dark green for barrel
-                ctx.fillRect(player.size*0.8, -player.size*0.2, player.size*2, player.size*0.4);
-                
-                // Barrel end
-                ctx.fillStyle = '#2a2a2a';
-                ctx.fillRect(player.size*2.8, -player.size*0.25, player.size*0.3, player.size*0.5);
-                
-                // Tank tracks
-                ctx.fillStyle = '#1a1a1a';  // Black tracks
-                ctx.fillRect(-player.size*1.2, player.size*0.8, player.size*2.4, player.size*0.4);
-                ctx.fillRect(-player.size*1.2, -player.size*1.2, player.size*2.4, player.size*0.4);
-                
-                // Track details
-                ctx.fillStyle = '#333';
-                for (let i = 0; i < 6; i++) {
-                    ctx.fillRect(-player.size + i * player.size*0.4, player.size*0.85, player.size*0.25, player.size*0.3);
-                    ctx.fillRect(-player.size + i * player.size*0.4, -player.size*1.15, player.size*0.25, player.size*0.3);
-                }
-                
-                ctx.restore();
-            }
+    ctx.save();
+    ctx.translate(player.x, player.y);
+    ctx.rotate(player.angle);
+
+    ctx.drawImage(
+        playerImage,
+        -player.size,
+        -player.size,
+        player.size * 2,
+        player.size * 2
+    );
+
+    ctx.restore();
+};
+
             
             // Draw enemies
             enemies.forEach(enemy => {
