@@ -147,6 +147,22 @@
         
         // Player object
         const player = {
+    // Xe tăng mới
+}
+
+
+    const tankImage = new Image();
+    tankImage.src = '1000010449.jpg';
+
+    function drawPlayer() {
+        ctx.drawImage(tankImage, player.x, player.y, player.width, player.height);
+    }
+
+    tankImage.onload = function() {
+        gameLoop();
+    }
+
+
             x: canvas.width / 2,
             y: canvas.height / 2,
             size: PLAYER_SIZE,
